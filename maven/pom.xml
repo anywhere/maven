@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<repositories>
+		<repository>
+			<id>oosnmpRepo</id>
+			<name>oosnmp.com Repository</name>
+			<url>dav:https://server.oosnmp.net/dist/release</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<cglib>2.2.2</cglib>
+		<ch.qos.logback>1.0.13</ch.qos.logback>
+		<com.google.code.gson>2.2.3</com.google.code.gson>
+		<com.google.collections>1.0</com.google.collections>
+		<com.jolbox.bonecp>0.7.1.RELEASE</com.jolbox.bonecp>
+		<com.sun.mail>1.4.6</com.sun.mail>
+		<com.typesafe.akka>2.1.4</com.typesafe.akka>
+		<commons-beanutils>1.8.2</commons-beanutils>
+		<commons-httpclient>3.0.1</commons-httpclient>
+		<dom4j>1.6.1</dom4j>
+		<javax.faces>1.2</javax.faces>
+		<log4j>1.2.17</log4j>
+		<mysql>5.1.25</mysql>
+		<net.sf.ehcache>2.6.6</net.sf.ehcache>
+		<net.sf.jxls>1.0</net.sf.jxls>
+		<org.apache.activemq>5.7.0</org.apache.activemq>
+		<org.apache.commons.commons-lang3>3.1</org.apache.commons.commons-lang3>
+		<org.apache.poi>3.9</org.apache.poi>
+		<org.apache.struts>2.3.14.2</org.apache.struts>
+		<org.apache.tomcat>7.0.40</org.apache.tomcat>
+		<org.apache.velocity>1.7</org.apache.velocity>
+		<org.aspectj>1.7.2</org.aspectj>
+		<org.freemarker.freemarker>2.3.19</org.freemarker.freemarker>
+		<org.hibernate>5.0.1.Final</org.hibernate>
+		<org.jdom>1.1.3</org.jdom>
+		<org.jfree.jfreechart>1.0.14</org.jfree.jfreechart>
+		<org.mybatis.caches.mybatis-ehcache>1.0.2</org.mybatis.caches.mybatis-ehcache>
+		<org.mybatis.spring>1.2.0</org.mybatis.spring>
+		<org.mybatis>3.2.2</org.mybatis>
+		<org.quartz-scheduler>1.8.6</org.quartz-scheduler>
+		<org.slf4j>1.7.5</org.slf4j>
+		<org.snmp4j.agent>2.0.6</org.snmp4j.agent>
+		<org.snmp4j>2.1.0</org.snmp4j>
+		<org.springframework.security>3.1.4.RELEASE</org.springframework.security>
+		<org.springframework>3.2.3.RELEASE</org.springframework>
+		<scala>2.10.1</scala>
+		<junit>4.11</junit>
+	</properties>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.unishine.nms</groupId>
+	<artifactId>NMS</artifactId>
+	<version>1.0.0</version>
+	<packaging>pom</packaging>
+	<url>http://maven.apache.org</url>
+
+	<!-- 待聚合模块 -->
+	<modules>
+		<module>../oms-commonserver</module>
+		<module>../oms-collectionservif</module>
+		<module>../oms-mediation</module>
+		<module>../oms-discovery</module>
+		<module>../oms-ping</module>
+		<module>../oms-serverif</module>
+		<!-- <module>../oms-AMServer</module> -->
+		<module>../oms-NMServer</module>
+		<module>../oms-NMServerCollection</module>
+		<!-- <module>../oms-PMServer</module> -->
+		<!-- <module>../oms-SMSServer</module> -->
+		<!-- <module>../oms-Config</module> -->
+		<module>../oms-Collector</module>
+		<module>../oms</module>
+	</modules>
+
+</project>
