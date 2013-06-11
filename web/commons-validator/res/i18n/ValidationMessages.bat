@@ -1,0 +1,5 @@
+attrib -R ValidationMessages.properties
+
+native2ascii -encoding gb2312 ValidationMessages_zh_CN_src.properties ValidationMessages_zh_CN.properties
+native2ascii -encoding gb2312 ValidationMessages_en_US_src.properties ValidationMessages_en_US.properties
+native2ascii -encoding gb2312 ValidationMessages_en_US_src.properties ValidationMessages.properties
