@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<!-- -->
+<configuration>
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<Target>System.out</Target>
+		<encoder>
+			<pattern>%date %-5level %logger - %msg %n</pattern>
+		</encoder>
+	</appender>
+	<appender name="logfile"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
+		<!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy -->
+		<!--for further documentation -->
+		<file>../logs/oms.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/oms.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %-5level %logger - %msg %n</pattern>
+		</encoder>
+	</appender>
+	<logger name="org.springframework" level="ERROR" />
+	<logger name="org.springframework.security" level="ERROR" />
+	<logger name="org.springframework.security.config" level="ERROR" />
+	<logger name="com.opensymphony.xwork2" level="DEBUG" />
+	<logger name="com.opensymphony.xwork2.config" level="ERROR" />
+	<logger name="com.opensymphony.xwork2.util" level="ERROR" />
+	<logger name="org.apache.struts" level="DEBUG" />
+	<logger name="com.apache.ibatis" level="DEBUG" />
+	<logger name="org.apache.ibatis.io" level="INFO" />
+	<logger name="org.apache.commons" level="ERROR" />
+	<logger name="org.apache.struts2" level="DEBUG" />
+	<logger name="org.apache.struts2.util" level="ERROR" />
+	<logger name="org.apache.struts2.json" level="ERROR" />
+	<logger name="org.mybatis.spring" level="ERROR" />
+	<logger name="net.sf.ehcache" level="INFO" />
+	<logger name="com.jolbox.bonecp" level="WARN" />
+	<logger name="com.unishine.nms.client.dao.gis" level="INFO" />
+	<logger name="java.sql" level="INFO" />
+	<root level="ERROR">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="logfile" />
+	</root>
+</configuration>

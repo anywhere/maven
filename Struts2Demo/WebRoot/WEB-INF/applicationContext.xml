@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 指定Spring配置文件的Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+     <!-- 以下二个方式，在配置Action时有所不同
+     	方式一所对应的Action配置为:
+     	<action name="springTest" class="loginAction">
+        	<result name="input">login.jsp</result>
+            <result name="success">welcome.jsp</result>
+        </action>
+        
+        方式二所对应的Action配置为:
+        <action name="springTest" class="struts2.spring.SpringTestAction">
+        	<result name="input">login.jsp</result>
+            <result name="success">welcome.jsp</result>
+        </action>
+      -->
+      
+	<!--方式一： 配置一个业务实现类 
+    <bean id="myService" class="struts2.spring.MyServerImp"/>
+	配置一个Struts2控制器对应的Bean实例 
+    <bean id="loginAction" class="struts2.spring.SpringTestAction" scope="prototype">
+		依赖注入业务实现类 
+		<property name="ms" ref="myService"/>
+	</bean>
+	-->
+	<!-- 方式二 -->
+	<bean id="ms" class="struts2.spring.MyServerImp"/>
+	
+	<!-- jsf的配置 -->
+	<bean id="bs" class="struts2.jsf.BookService"></bean>
+</beans>

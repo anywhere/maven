@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 指定使用按type的自动装配策略 -->
+	<constant name="struts.objectFactory.spring.autoWire" value="type"></constant>
+	
+    <package name="struts2AndSpring" extends="struts-default">
+        <!-- 整合Spring方式一：定义用户请求的Action，该Action的class属性不是实际处理类，而且在applicationContext.xml中配置的bean的id -->
+        <!--  action name="springTest" class="loginAction">
+        	<result name="input">login.jsp</result>
+            <result name="success">welcome.jsp</result>
+        </action>-->
+        
+         <!-- 整合Spring方式二 定义用户请求的Action，该Action的class属性是实际处理 -->
+        <action name="springTest" class="struts2.spring.SpringTestAction">
+        	<result name="input">login.jsp</result>
+            <result name="success">welcome.jsp</result>
+        </action>
+    </package>
+</struts>

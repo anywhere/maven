@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="struts2.Login" extends="struts-default">
+		<!-- 定义监听器 -->
+		<interceptors>
+			<interceptor name="interce" class="Interceptor.MyFilterInterceptor">
+				<!-- 重新指定name属性的属性值 -->
+				<!-- param name="name">改名后的方法过滤拦截器</param> -->
+				<!-- 指定execute方法不需要拦截 -->
+				<!-- param name="excludeMethods">execute</param> -->
+			</interceptor>
+		</interceptors>
+		<action name="Login" class="struts2.action.LoginAction">
+			<result name="input">jsp/index.jsp</result>
+			<result name="error">jsp/error.jsp</result>
+			<result name="success">jsp/welcome.jsp</result>
+
+			<!-- 使用Struts默认的拦截器 -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<!-- 使用自定义的拦截器 -->
+			<interceptor-ref name="interce"></interceptor-ref>
+		</action>
+
+		<!-- 为action元素指定method属性，值为要调用Action中的方法名。在页面中直接使用此Action(Register.do) -->
+		<action name="Register" class="struts2.action.LoginAction"
+			method="register">
+			<result name="input">jsp/index.jsp</result>
+			<result name="error">jsp/error.jsp</result>
+			<result name="success">jsp/welcome.jsp</result>
+		</action>
+	</package>
+</struts>

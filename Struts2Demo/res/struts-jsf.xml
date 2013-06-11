@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="jsf" extends="jsf-default">
+		<interceptors>
+			<interceptor-stack name="jsfFullStack">
+				<!-- 引用Struts2中原有的基本拦截器 -->
+				<interceptor-ref name="params" />
+				<interceptor-ref name="basicStack"/>
+				<!-- 引用JSF插件中的jsfStack拦截器 -->
+				<interceptor-ref name="jsfStack"/>
+			</interceptor-stack>
+		</interceptors>
+		<!-- 将jsfFullStack定义为系统默认的拦截器引用 -->
+		<default-interceptor-ref name="jsfFullStack"/>
+	</package>
+  
+	<package name="lee" extends="jsf">  
+		<action name="list" class="struts2.jsf.BookAction">
+			<result name="success" type="jsf"/>
+		</action>
+		<action name="edit" class="struts2.jsf.BookAction">
+			<result name="success" type="jsf"/>
+			<result name="list" type="redirect">list.do</result>
+		</action>
+	</package>
+</struts>

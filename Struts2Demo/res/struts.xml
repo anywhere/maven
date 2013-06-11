@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 推荐在此文件中配置struts2的常量。表明该应用使用到的资源文件为baseName为"messageResource",messageRecource为针对class的路径 -->
+	<constant name="struts.custom.i18n.resources" value="properties.messageResource"></constant>
+	<!-- 置为开发阶段，出错了会提示更多信息，如果在发布阶段应该置为false -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 当strtus.xml文件改变后，系统自动加载该文件，默认为false -->
+	<constant name="struts.configuration.xml.reload" value="true"></constant>
+	<!-- 使用的编码为UTF-8 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+
+	<constant name="struts.i18n.reload" value="true" />
+
+	<constant name="struts.action.extension" value="do" />
+
+	<!-- 避免文件上传时使用Tomcat的工作路径 -->
+	<constant name="struts.multipart.SaveDir" value=""></constant>
+
+	<!-- 指定使用按type的自动装配策略 -->
+	<constant name="struts.objectFactory.spring.autoWire" value="type"></constant>
+
+
+	<!-- 引入其它struts的配置文件 -->
+	<include file="struts-login.xml"></include>
+	<include file="struts-file.xml"></include>
+	<include file="struts-jsonAjax.xml"></include>
+	<include file="struts-spring.xml"></include>
+	<!-- 定义拦截器，用于过滤一些操作、数据 -->
+	<!-- interceptors -->
+	<!-- 定义权限检查的拦截器 -->
+	<!-- interceptor name="author" class=""></interceptor -->
+	<!-- 定义日志记录的拦截器 -->
+	<!-- interceptor name="log" class=""></interceptor -->
+	<!-- 定义一个拦截器栈 -->
+	<!-- interceptor-stack name="authorLog" -->
+	<!-- interceptor-ref name="author"></interceptor-ref -->
+	<!-- interceptor-ref name="log"></interceptor-ref -->
+	<!-- /interceptor-stack -->
+	<!-- /interceptors -->
+
+
+	<!-- 使用命名空间避免了一个程序中Action不能同名的问题，默认为“”。可不加namespace -->
+	<!-- package name="struts2" extends="struts-default" namespace="/book" -->
+
+	<package name="struts2" extends="struts-default">
+		<!-- 逻辑Action -->
+		<action name="book" class="struts2.action.BookAction">
+			<result name="success">jsp/showBook.jsp</result>
+			<result name="login">jsp/index.jsp</result>
+
+			<!-- <interceptor-ref name="authorLog"></interceptor-ref> -->
+		</action>
+	</package>
+
+
+
+	<package name="ajax" extends="struts-default">
+		<action name="AjaxTest" class="struts2.ajax.AjaxTestAction">
+			<result>ajaxPage/AjaxResult.jsp</result>
+		</action>
+		<action name="Test3">
+			<result>ajaxPage/testjs.jsp</result>
+		</action>
+	</package>
+
+	<package name="example" extends="json-default">
+		<action name="jsonExcute" class="lee.JsonTestAction" method="jsonExcute">
+			<result type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<action name="test" class="lee.JsonTestAction" method="test">
+			<result name="success">/json_test.jsp</result>
+		</action>
+
+		<action name="menu" class="lee.MenuBar" method="menu">
+			<result type="json">
+				<param name="root">menuData</param>
+			</result>
+		</action>
+	</package>
+
+</struts>
