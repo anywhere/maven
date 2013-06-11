@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.ssm.dao.UserDao">
+	<resultMap type="User" id="userMap">
+		<result property="id" column="ID" />
+		<result property="username" column="USERNAME" />
+		<result property="password" column="PASSWORD" />
+		<result property="displayname" column="DISPLAYNAME" />
+		<result property="enabled" column="ENABLED" />
+		<result property="msisdn" column="MSISDN" />
+		<result property="email" column="EMAIL" />
+		<result property="lastLoginTime" column="LAST_LOGIN_TIME" />
+		<result property="loginFaildTims" column="LOGIN_FAILD_TIMS" />
+		<result property="dateOfExpiry" column="DATE_OF_EXPIRY" />
+		<result property="createDate" column="CREATE_DATE" />
+		<collection property="roles" column="ID" javaType="ArrayList"
+			ofType="Roles" select="com.framework.ssm.dao.RoleDao.queryByUserId">
+		</collection>
+	</resultMap>
+
+	<insert id="insert" parameterType="User">
+		<![CDATA[ insert into shine_user(ID,USERNAME,PASSWORD,DISPLAYNAME,MSISDN,EMAIL,CREATE_DATE) 
+		values(#{id},#{username},#{password},#{displayname},#{msisdn},#{email},#{createDate}) ]]>
+	</insert>
+
+	<update id="update" parameterType="User">
+		<![CDATA[update shine_user ]]>
+		<set>
+			<if test="username!=null and username!=''">username=#{username},</if>
+			<if test="password!=null and password!=''">password=#{password},</if>
+			<if test="displayname!=null and displayname!=''">displayname=#{displayname},</if>
+			<if test="enabled!=null">enabled=#{enabled},</if>
+			<if test="msisdn!=null and msisdn!=''">msisdn=#{msisdn},</if>
+			<if test="email!=null and email!=''">email=#{email},</if>
+			<if test="lastLoginTime!=null">last_login_time=#{lastLoginTime},</if>
+			<if test="loginFaildTims!=null">login_faild_tims=#{loginFaildTims},</if>
+			<if test="dateOfExpiry!=null">date_of_expiry=#{dateOfExpiry}</if>
+		</set>
+		<trim prefix="where" prefixOverrides=",">
+			id=#{id}
+		</trim>
+	</update>
+
+	<delete id="delete" parameterType="string">
+		<![CDATA[delete from shine_user where id=#{id} ]]>
+	</delete>
+
+	<select id="getById" parameterType="string" resultMap="userMap">
+		<![CDATA[select * from shine_user where id=#{id} ]]>
+	</select>
+
+	<select id="get" parameterType="User" resultType="User"
+		resultMap="userMap">
+		<![CDATA[ select * from shine_user ]]>
+		<trim prefix="where" suffixOverrides="and">
+			<if test="username!=null and username!=''">username=#{username} and </if>
+			<if test="displayname!=null and displayname!=''">displayname=#{displayname} and </if>
+			<if test="msisdn!=null and msisdn!=''">msisdn=#{msisdn} and </if>
+			<if test="email!=null and email!=''">email=#{email}</if>
+		</trim>
+	</select>
+
+	<select id="queryByRoleId" parameterType="string" resultType="User"
+		resultMap="userMap">
+		select user.* from shine_user user left join shine_user_role
+		ur on user.id=ur.user_id left join shine_role role on ur.role_id =
+		role.id where role.id=#{id}
+	</select>
+	
+	<select id="queryByUsername" parameterType="string" resultType="User" resultMap="userMap">
+		<![CDATA[ select * from shine_user where username=#{username}]]>
+	</select>
+
+	<select id="select" parameterType="User" resultType="User"
+		resultMap="userMap">
+		<![CDATA[ select * from shine_user ]]>
+		<include refid="conditions"/>
+	</select>
+
+	<select id="selectPage" parameterType="User" resultType="User"
+		resultMap="userMap">
+		<![CDATA[ select * from shine_user ]]>
+		<include refid="conditions"/>
+		<include refid="public.orderSql" />
+		<include refid="public.limitSql" />
+	</select>
+
+	<select id="count" parameterType="User" resultType="Integer">
+		<![CDATA[ select count(*) from shine_user ]]>
+		<include refid="conditions"/>
+	</select>
+
+	<sql id="conditions">
+		<trim prefix="where" suffixOverrides="and">
+			<if test="username!=null and username!=''">username like "%"#{username}"%" and </if>
+			<if test="displayname!=null and displayname!=''">displayname like "%"#{displayname}"%" and </if>
+			<if test="msisdn!=null and msisdn!=''">msisdn like "%"#{msisdn}"%" and </if>
+			<if test="email!=null and email!=''">email like "%"#{email}"%"</if>
+		</trim>
+	</sql>
+
+	<select id="userLogin" parameterType="User" resultMap="userMap">
+		<![CDATA[ select * from shine_user where username=#{username} and password=#{password} ]]>
+	</select>
+
+</mapper>

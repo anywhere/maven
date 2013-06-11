@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.ssm.dao.RoleDao">
+	<resultMap type="Roles" id="roleMap">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+		<result property="remarks" column="REMARKS" />
+		<result property="createDate" column="CREATE_DATE" />
+		<collection property="resources" column="ID" javaType="ArrayList"
+			ofType="Resource" select="com.framework.ssm.dao.ResourceDao.queryByRoleId">
+		</collection>
+	</resultMap>
+
+	<insert id="insert" parameterType="Roles">
+		<![CDATA[ insert into shine_role(id,name,remarks,create_date) values(#{id},#{name},#{remarks},#{createDate}) ]]>
+	</insert>
+
+	<update id="update" parameterType="Roles">
+		<![CDATA[ update shine_role ]]>
+		<set>
+			<if test="name!=null and name!=''">name=#{name},</if>
+			<if test="remarks!=null and remarks!=''">remarks=#{remarks}</if>
+		</set>
+		<trim prefix="where" prefixOverrides=",">
+			id=#{id}
+		</trim>
+	</update>
+
+	<delete id="delete" parameterType="string">
+		<![CDATA[ delete from shine_role where id=#{id}]]>
+	</delete>
+
+	<select id="getById" parameterType="string" resultMap="roleMap">
+		<![CDATA[ select * from shine_role where id=#{id} ]]>
+	</select>
+
+	<select id="get" parameterType="Roles" resultType="Roles"
+		resultMap="roleMap">
+		<![CDATA[ select * from shine_role ]]>
+		<trim prefix="where" suffixOverrides="and">
+			<if test="id!=null and id!=''">id!=#{id} and</if>
+			<if test="name!=null and name!=''">name=#{name} </if>
+		</trim>
+	</select>
+
+	<select id="queryByUserId" parameterType="string" resultType="Roles"
+		resultMap="roleMap">
+		<![CDATA[ select role.* from shine_role role left join shine_user_role ur on role.id=ur.role_id left join shine_user user on ur.user_id = user.id where user.id=#{id} ]]>
+	</select>
+
+	<select id="select" parameterType="Roles" resultType="Roles"
+		resultMap="roleMap">
+		<![CDATA[ select * from shine_role ]]>
+		<trim prefix="where" suffixOverrides="and">
+			<if test="id!=null and id!=''">id!=#{id} and </if>
+			<if test="name!=null and name!=''">name=#{name} </if>
+		</trim>
+	</select>
+
+	<select id="selectPage" parameterType="Roles" resultType="Roles"
+		resultMap="roleMap">
+		<![CDATA[ select * from shine_role ]]>
+		<include refid="conditions"/>
+		<include refid="public.orderSql" />
+		<include refid="public.limitSql" />
+	</select>
+
+	<select id="count" parameterType="Roles" resultType="Integer">
+		<![CDATA[ select count(*) from shine_role ]]>
+		<include refid="conditions"/>
+	</select>
+
+	<sql id="conditions">
+		<trim prefix="where" suffixOverrides="and">
+			<if test="name!=null and name!=''">name like "%"#{name}"%" and </if>
+			<if test="remarks!=null and remarks!=''">remarks like "%"#{remarks}"%" and </if>
+			<if test="createDate!=null and createDate!=''">create_date=#{createDate} </if>
+		</trim>
+	</sql>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.framework.ssm.dao.ResourceDao">
+	<resultMap type="Resources" id="resourceMap">
+		<result property="id" column="ID" />
+		<result property="name" column="NAME" />
+		<result property="pid" column="PARENT_ID" />
+		<result property="isOpen" column="IS_OPEN" />
+		<result property="url" column="URL" />
+		<result property="iconSkin" column="ICON_SKIN" />
+		<result property="isParent" column="IS_PARENT" />
+		<result property="type" column="TYPE" />
+		<result property="rootId" column="ROOT_ID" />
+		<result property="currentOrder" column="CURRENT_ORDER" />
+		<result property="currentLevel" column="CURRENT_LEVEL" />
+		<result property="visiable" column="VISIABLE" />
+		<result property="permit" column="PERMIT" />
+		<result property="isMenu" column="IS_MENU" />
+		<result property="targetId" column="TARGET_ID" />
+		<result property="fixed" column="FIXED" />
+		<result property="createDate" column="CREATE_DATE" />
+	</resultMap>
+
+	<insert id="insert" parameterType="Resources">
+		<![CDATA[ insert into shine_resource(ID,NAME,PARENT_ID,IS_OPEN,URL,ICON_SKIN,IS_PARENT,TYPE,ROOT_ID,CURRENT_ORDER,CURRENT_LEVEL,VISIABLE,PERMIT,IS_MENU,CREATE_DATE)
+		 values(#{id},#{name},#{pid},#{isOpen},#{url},#{iconSkin},#{isParent},#{type},#{rootId},#{currentOrder},#{currentLevel},#{visiable},#{permit},#{isMenu},#{createDate}) ]]>
+	</insert>
+	
+	<update id="update" parameterType="Resources">
+		<![CDATA[ update shine_resource ]]>
+		<set>
+			<if test="pid!=null and pid!=''">parent_id = #{pid},</if>
+			<if test="name!=null and name!=''">name = #{name},</if>
+			<if test="rootId!=null and rootId!=''">root_id = #{rootId},</if>
+			<if test="currentOrder!=null">current_order = #{currentOrder},</if>
+			<if test="url!=null and url!=''">url = #{url},</if>
+			<if test="iconSkin!=null and iconSkin!=''">icon_skin = #{iconSkin},</if>
+			<if test="visiable!=null">visiable = #{visiable},</if>
+			<if test="permit!=null and permit!=''">permit = #{permit},</if>
+			<if test="isMenu!=null">is_menu = #{isMenu},</if>
+			<if test="isOpen!=null">is_open = #{isOpen},</if>
+			<if test="isParent!=null">is_parent = #{isParent}</if>
+		</set>
+		<trim prefix="where" prefixOverrides=",">
+			id=#{id}
+		</trim>
+	</update>
+	
+	<delete id="delete" parameterType="string">
+		<![CDATA[ delete from shine_resource where id = #{id} ]]>
+	</delete>
+		
+	<select id="getById" parameterType="string" resultMap="resourceMap">
+		<![CDATA[ select * from shine_resource where id=#{id} ]]>
+	</select>
+	
+	<select id="get" parameterType="Resources" resultType="Resources" resultMap="resourceMap">
+		<![CDATA[ select * from shine_resource ]]>
+		<trim prefix="where" suffixOverrides="and">
+			<if test="id!=null and id!=''">id!=#{id} and</if>
+			<if test="name!=null and name!=''">name=#{name}</if>
+		</trim>
+	</select>
+	
+	<select id="select" parameterType="Resources" resultType="Resources" resultMap="resourceMap">
+		<![CDATA[ select * from shine_resource ]]>
+		<trim prefix="where" suffixOverrides="and">
+			<if test="name!=null and name!=''">name=#{name} and </if>
+			<if test="pid!=null and pid!=''">parent_id=#{pid}</if>
+		</trim>
+		<![CDATA[ order by CURRENT_ORDER ASC ]]>
+	</select>
+	
+	<select id="queryResourceMenus" resultMap="resourceMap" parameterType="string">
+        <![CDATA[ select r2.* from shine_resource as r1, shine_resource as r2 where r1.id = r2.parent_id and (r1.id =#{id} or r1.parent_id=#{id}) and r2.is_menu=1 ]]>
+        <![CDATA[ order by CURRENT_ORDER ASC ]]>
+    </select>
+	
+	<select id="queryByRoleId" parameterType="string" resultType="Resources"
+		resultMap="resourceMap">
+		<![CDATA[ select resource.id,resource.name,resource.parent_id,resource.icon_skin from shine_resource resource left join shine_role_resource rr on resource.id=rr.resource_id left join shine_role role on rr.role_id = role.id where role.id=#{id} ]]>
+	</select>
+	
+</mapper>
