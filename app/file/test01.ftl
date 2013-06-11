@@ -1,0 +1,1 @@
+第一个Freemarker测试,${stringvalue}

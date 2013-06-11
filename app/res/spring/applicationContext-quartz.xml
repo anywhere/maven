@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop 
+		    http://www.springframework.org/schema/aop/spring-aop.xsd
+		    http://www.springframework.org/schema/tx 
+		    http://www.springframework.org/schema/tx/spring-tx.xsd
+		    http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- =========================心跳定时器 begin====================================================== -->
+	<bean name="heartbeatServer" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="com.unishine.nms.base.heartbeat.HeartBeatServer" />
+	</bean>
+	<bean name="heartbeatClient" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass"
+			value="com.unishine.nms.base.heartbeat.HeartBeatClient" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="name" value="Collector" />
+				<entry key="address" value="192.168.0.22" />
+				<entry key="port" value="25535" />
+				<entry key="interval" value="5000" />
+			</map>
+		</property>
+	</bean>
+	<!-- 定时器 -->
+	<bean id="heartbeatTriggerServer" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="heartbeatServer" />
+		<!-- 5 seconds -->
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+		<property name="repeatInterval" value="0" />
+	</bean>
+	<bean id="heartbeatTriggerClient" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="heartbeatClient" />
+		<!-- 5 seconds -->
+		<property name="startDelay" value="5000" />
+		<property name="repeatCount" value="0" />
+		<property name="repeatInterval" value="0" />
+	</bean>
+	<!-- 启动定时器 -->
+	<bean id="sfb"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="heartbeatTriggerServer" />
+				<ref bean="heartbeatTriggerClient" />
+			</list>
+		</property>
+	</bean>
+	<!-- =========================心跳定时器 end====================================================== -->
+
+</beans>
