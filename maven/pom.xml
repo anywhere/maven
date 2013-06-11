@@ -59,28 +59,17 @@
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.unishine.nms</groupId>
-	<artifactId>NMS</artifactId>
+	<groupId>com.anywhere</groupId>
+	<artifactId>anywhere</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
 	<url>http://maven.apache.org</url>
 
 	<!-- 待聚合模块 -->
 	<modules>
-		<module>../oms-commonserver</module>
-		<module>../oms-collectionservif</module>
-		<module>../oms-mediation</module>
-		<module>../oms-discovery</module>
-		<module>../oms-ping</module>
-		<module>../oms-serverif</module>
-		<!-- <module>../oms-AMServer</module> -->
-		<module>../oms-NMServer</module>
-		<module>../oms-NMServerCollection</module>
-		<!-- <module>../oms-PMServer</module> -->
-		<!-- <module>../oms-SMSServer</module> -->
-		<!-- <module>../oms-Config</module> -->
-		<module>../oms-Collector</module>
-		<module>../oms</module>
+		<module>../web/commons-base</module>
+		<module>../web/commons-validator</module>
+		<module>../web/commons-ssm</module>
 	</modules>
 
 </project>
