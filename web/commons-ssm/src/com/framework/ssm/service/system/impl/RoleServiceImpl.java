@@ -149,10 +149,10 @@ public class RoleServiceImpl implements RoleService {
         }
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("roleId", roleId);
-        // roleDao.deleteRole(userId);
+        roleDao.deleteResources(roleId);
         if (null != resources && resources.length > 0) {
             params.put("ids", resources);
-            // roleDao.insertRole(params);
+            roleDao.setResources(params);
         }
         
     }

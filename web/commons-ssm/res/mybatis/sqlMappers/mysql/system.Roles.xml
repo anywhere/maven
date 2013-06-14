@@ -70,6 +70,18 @@
 		<![CDATA[ select count(*) from shine_role ]]>
 		<include refid="conditions"/>
 	</select>
+	
+	<delete id="deleteResources" parameterType="string">
+		<![CDATA[ delete from shine_role_resource where ROLE_ID=#{roleId} ]]>
+	</delete>
+	
+	<insert id="setResources" parameterType="Map">
+		<![CDATA[ insert into shine_role_resource (role_id,resource_id) values ]]>
+		<foreach collection="ids" item="item" index="index"
+			separator=", ">
+			(#{roleId},#{item})
+		</foreach>
+	</insert>
 
 	<sql id="conditions">
 		<trim prefix="where" suffixOverrides="and">

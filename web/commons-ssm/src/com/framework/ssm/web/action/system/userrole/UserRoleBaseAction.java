@@ -22,8 +22,6 @@ import com.framework.ssm.web.action.StrutsAction;
 @SuppressWarnings("serial")
 public abstract class UserRoleBaseAction extends StrutsAction {
     
-    protected List<Roles> list;
-    
     protected List<Roles> urlist;
     
     protected User user;
@@ -34,12 +32,8 @@ public abstract class UserRoleBaseAction extends StrutsAction {
     @Resource
     protected RoleService roleService;
     
-    public List<Roles> getList() {
-        return list;
-    }
-    
-    public void setList(List<Roles> list) {
-        this.list = list;
+    public List<Roles> getUrlist() {
+        return urlist;
     }
     
     public User getUser() {

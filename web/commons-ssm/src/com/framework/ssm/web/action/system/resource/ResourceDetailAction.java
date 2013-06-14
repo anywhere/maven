@@ -20,6 +20,6 @@ public class ResourceDetailAction extends ResourceBaseAction {
         if (null == resource) {
             throw new BussinessException(CODE_NOT_EXIST, "该资源");
         }
-        return SUCCESS;
+        return "detail";
     }
 }

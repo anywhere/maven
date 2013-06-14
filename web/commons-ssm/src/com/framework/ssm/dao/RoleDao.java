@@ -1,6 +1,7 @@
 package com.framework.ssm.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -23,5 +24,9 @@ public interface RoleDao extends IGenericDao<Roles, String> {
     
     /** 条件查询所有角色 */
     public abstract List<Roles> queryByResourceId(String resourceId);
+    
+    public abstract void deleteResources(String roleId);
+    
+    public abstract void setResources(Map<String, Object> params);
     
 }
