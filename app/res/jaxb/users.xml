@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <user id="1">
+        <name>Unmi</name>
+    </user>
+    <user id="2">
+        <name>She</name>
+    </user>
+</users>
