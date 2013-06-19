@@ -4,7 +4,7 @@ import javax.annotation.Resource;
 
 import com.framework.ssm.pojo.User;
 import com.framework.ssm.service.system.UserService;
-import com.framework.ssm.web.action.StrutsAction;
+import com.framework.ssm.web.action.file.FileAction;
 
 /**
  * 
@@ -16,7 +16,7 @@ import com.framework.ssm.web.action.StrutsAction;
  * <ul>
  */
 @SuppressWarnings("serial")
-public abstract class UserBaseAction extends StrutsAction {
+public abstract class UserBaseAction extends FileAction {
     
     protected User user;
     
