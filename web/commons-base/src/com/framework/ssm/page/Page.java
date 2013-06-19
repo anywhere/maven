@@ -101,6 +101,13 @@ public class Page<T> {
     }
     
     /**
+     * 设置总页数.
+     */
+    public void setTotalRecord(int totalSize) {
+        this.totalRecord = totalSize;
+    }
+
+    /**
      * 取总记录数.
      */
     public int getTotalRecord() {

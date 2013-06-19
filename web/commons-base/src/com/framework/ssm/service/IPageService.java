@@ -15,6 +15,6 @@ import com.framework.ssm.page.Page;
 public interface IPageService<T> {
     
     /** 条件分页查询 */
-    Page queryPage(T bean, Page page);
+    Page<T> queryPage(T info, Page<T> page);
     
 }
