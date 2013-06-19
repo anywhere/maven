@@ -20,7 +20,6 @@ public class UserQueryAction extends UserBaseAction {
             user = new User();
         }
         page = userService.queryPage(user, page);
-        list = page.getData();
         return SUCCESS;
     }
     
