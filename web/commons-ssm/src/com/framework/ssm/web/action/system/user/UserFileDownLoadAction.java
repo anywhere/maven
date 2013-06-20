@@ -2,6 +2,10 @@ package com.framework.ssm.web.action.system.user;
 
 import java.io.File;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.framework.ssm.exception.BussinessException;
+
 /**
  * 文件下载基础action
  * 
@@ -16,6 +20,9 @@ public class UserFileDownLoadAction extends UserQueryAction {
     protected String exec() {
         super.exec();
         file = new File(filePath, getFileFileName());
+        if (null == ServletActionContext.getServletContext().getResourceAsStream(file.getPath())) {
+            throw new BussinessException("文件不存在或已经被删除！");
+        }
         return SUCCESS;
     }
     

@@ -143,7 +143,7 @@ public abstract class FileAction extends StrutsAction {
     /**
      * 获取下载文件
      */
-    public InputStream getTargetFile() throws Exception {
+    public InputStream getTargetFile() {
         return ServletActionContext.getServletContext().getResourceAsStream(file.getPath());
     }
 }
