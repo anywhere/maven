@@ -20,7 +20,6 @@ public class RoleQueryAction extends RoleBaseAction {
             role = new Roles();
         }
         page = roleService.queryPage(role, page);
-        list = page.getData();
         return SUCCESS;
     }
     
