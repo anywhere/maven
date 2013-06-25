@@ -1,21 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- For assistance related to logback-translator or configuration  -->
+<!-- For assistance related to logback-translator or configuration -->
 <!-- files in general, please contact the logback user mailing list -->
-<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
-<!--                                                                -->
-<!-- For professional support please see                            -->
-<!--    http://www.qos.ch/shop/products/professionalSupport         -->
-<!--                                                                -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<!-- -->
 <configuration>
-	<appender name="stdout"
-		class="ch.qos.logback.core.ConsoleAppender">
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
 		<Target>System.out</Target>
 		<encoder>
 			<pattern>%date %-5level %logger - %msg %n</pattern>
 		</encoder>
 	</appender>
-	<root level="DEBUG">
+	<logger name="org.springframework" level="ERROR" />
+	<logger name=" org.springframework.context" level="ERROR" />
+	<logger name="org.springframework.security" level="ERROR" />
+	<logger name="org.springframework.security.config" level="ERROR" />
+	<logger name="com.apache.ibatis" level="DEBUG" />
+	<logger name="org.apache.ibatis.io" level="ERROR" />
+	<logger name="org.apache.commons" level="ERROR" />
+	<logger name="org.apache.tomcat.jdbc" level="DEBUG" />
+	<logger name="org.mybatis.spring" level="ERROR" />
+	<logger name="com.jolbox.bonecp" level="WARN" />
+	<logger name="com.mchange.v2" level="WARN" />
+	<logger name="com.alibaba.druid" level="WARN" />
+	<logger name="org.logicalcobwebs.proxool" level="WARN" />
+	<logger name="java.sql" level="DEBUG" />
+	<root level="INFO">
 		<appender-ref ref="stdout" />
 	</root>
 </configuration>

@@ -100,6 +100,12 @@
 			<version>${org.springframework}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework}</version>
+		</dependency>
+
 		<!-- Freemarker -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
@@ -126,14 +132,70 @@
 			<artifactId>quartz</artifactId>
 			<version>${org.quartz-scheduler}</version>
 		</dependency>
-		
+
 		<!-- validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
 			<version>${org.hibernate}</version>
 		</dependency>
-		
+
+		<!-- ########## JDBC Pool Test start ########## -->
+		<!-- Mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql}</version>
+		</dependency>
+
+		<!-- Bonecp -->
+		<dependency>
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+			<version>${com.jolbox.bonecp}</version>
+		</dependency>
+
+		<!-- c3p0 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>${c3p0}</version>
+		</dependency>
+
+		<!-- proxool -->
+		<dependency>
+			<groupId>proxool</groupId>
+			<artifactId>proxool</artifactId>
+			<version>${proxool}</version>
+		</dependency>
+
+		<!-- commons-dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp}</version>
+		</dependency>
+
+		<!-- tomcat JDBC -->
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jdbc</artifactId>
+			<version>${org.apache.tomcat}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-juli</artifactId>
+			<version>${org.apache.tomcat}</version>
+		</dependency>
+
+		<!-- Druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid}</version>
+		</dependency>
+		<!-- ########## JDBC Pool Test end ########## -->
+
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop 
+		    http://www.springframework.org/schema/aop/spring-aop.xsd
+		    http://www.springframework.org/schema/tx 
+		    http://www.springframework.org/schema/tx/spring-tx.xsd
+		    http://www.springframework.org/schema/context
+	        http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="byName">
+
+	<!-- 激活spring的注解. -->
+	<context:annotation-config />
+
+	<!-- 数据库配置文件位置 -->
+	<bean id="propertyConfigurerForJDBC"
+		class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="location">
+			<value>classpath:config/jdbc.properties</value>
+		</property>
+	</bean>
+
+	<!-- tomcat jdbc data sources -->
+	<bean id="tomcat_jdbc" class="org.apache.tomcat.jdbc.pool.DataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${datasource.driverClassName}" />
+		<property name="url" value="${datasource.url}" />
+		<property name="username" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<property name="initialSize" value="10" />
+		<property name="maxActive" value="50" />
+		<property name="maxWait" value="-1" />
+		<property name="maxIdle" value="3" />
+		<property name="minIdle" value="3" />
+	</bean>
+
+	<!-- bonecp jdbc data sources -->
+	<bean id="bonecp" class="com.jolbox.bonecp.BoneCPDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${datasource.driverClassName}" />
+		<property name="jdbcUrl" value="${datasource.url}" />
+		<property name="username" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<!-- 检查数据库连接池中空闲连接的间隔时间 -->
+		<property name="idleConnectionTestPeriodInMinutes" value="60" />
+		<!-- 连接池中未使用的链接最大存活时间 -->
+		<property name="idleMaxAgeInMinutes" value="240" />
+		<!-- 设置每个分区含有connection最大个数 -->
+		<property name="maxConnectionsPerPartition" value="30" />
+		<!-- 设置每个分区含有connection最小个数 -->
+		<property name="minConnectionsPerPartition" value="10" />
+		<!-- 设置每个分区数 -->
+		<property name="partitionCount" value="3" />
+		<!-- 设置分区中的connection增长数量 -->
+		<property name="acquireIncrement" value="5" />
+		<!-- 设置连接池阀值 -->
+		<property name="poolAvailabilityThreshold" value="10" />
+		<!-- 连接时间 -->
+		<property name="connectionTimeoutInMs" value="1" />
+		<property name="statementsCacheSize" value="100" />
+		<property name="releaseHelperThreads" value="3" />
+	</bean>
+
+	<!-- c3p0 data sources -->
+	<bean id="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="${datasource.driverClassName}" />
+		<property name="jdbcUrl" value="${datasource.url}" />
+		<property name="user" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<property name="acquireIncrement" value="1" />
+		<property name="initialPoolSize" value="2" />
+		<property name="maxIdleTime" value="60" />
+		<property name="maxPoolSize" value="10" />
+		<property name="minPoolSize" value="1" />
+
+		<property name="acquireRetryDelay" value="1000" />
+		<property name="acquireRetryAttempts" value="60" />
+		<property name="breakAfterAcquireFailure" value="false" />
+	</bean>
+
+	<!-- dbcp data sources -->
+	<bean id="commons_dbcp" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${datasource.driverClassName}" />
+		<property name="url" value="${datasource.url}" />
+		<property name="username" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<!-- 以下为可选参数 -->
+		<property name="initialSize" value="10" />
+		<property name="maxActive" value="50" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="5" />
+		<!--大于0 ，进行连接空闲时间判断，或为0，对空闲的连接不进行验证 -->
+		<property name="minEvictableIdleTimeMillis" value="60000" />
+		<!--失效检查线程运行时间间隔，如果小于等于0，不会启动检查线程 -->
+		<property name="timeBetweenEvictionRunsMillis" value="300000" />
+	</bean>
+
+	<!-- druid data sources -->
+	<bean id="druid" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${datasource.url}" />
+		<property name="username" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="20" />
+		<property name="maxWait" value="60000" />
+		<property name="minIdle" value="1" />
+		<property name="testWhileIdle" value="false" />
+	</bean>
+
+	<!-- proxool data sources -->
+	<bean id="proxool" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver" value="${datasource.driverClassName}" />
+		<property name="driverUrl" value="${datasource.url}" />
+		<property name="user" value="${datasource.username}" />
+		<property name="password" value="${datasource.password}" />
+		<property name="alias" value="proxool" />
+		<property name="maximumActiveTime" value="300000" />
+		<!--最少保持的空闲连接数(默认2个) -->
+		<property name="prototypeCount" value="2" />
+		<!--最大连接数(默认5个),超过了这个连接数,再有请求时,就排在队列中等候,最大的等待请求数由maximum-new-connections决定 -->
+		<property name="maximumConnectionCount" value="10" />
+		<!--最小连接数(默认2个) -->
+		<property name="minimumConnectionCount" value="2" />
+		<property name="simultaneousBuildThrottle" value="50" />
+		<property name="houseKeepingTestSql" value="select CURRENT_DATE" />
+	</bean>
+</beans>
