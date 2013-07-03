@@ -1,0 +1,18 @@
+package ${codepackage};
+
+import java.io.Serializable;
+import org.apache.commons.lang.builder.*;
+/**
+ * @author coder by ${author}
+ * <ul>
+ * <li>comment:Entity bean BaseObject</li>
+ * </ul>
+*/
+@SuppressWarnings("serial")
+public class BaseObject implements Serializable {
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
+}

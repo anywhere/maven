@@ -64,6 +64,7 @@
 		<druid>0.2.21</druid>
 		<proxool>0.9.1</proxool>
 		<commons-dbcp>1.4</commons-dbcp>
+		<org.apache.velocity>1.7</org.apache.velocity>
 		<junit>4.11</junit>
 	</properties>
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd    
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd    
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd    
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd    
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd    
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd    
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	<context:property-placeholder location="classpath:config/velocity.properties" />
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="preferFileSystemAccess" value="false" />
+		<property name="resourceLoaderPath" value="/vm" />
+		<property name="velocityProperties">
+			<props>
+				<prop key="velocimacro.library"></prop>
+				<prop key="input.encoding">utf-8</prop>
+				<prop key="output.encoding">utf-8</prop>
+				<prop key="default.contentType">text/html; charset=utf-8</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="modelMap" class="java.util.HashMap">
+		<constructor-arg>
+			<map>
+				<entry key="codepackage" value="${codepackage}" />
+				<entry key="author" value="${author}" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<bean id="velocityWriter" class="com.anywhere.velocity.VelocityWriter">
+		<property name="templateLocation" value="pojo/BaseObject.java.vm" />
+		<property name="filename" value="C:/test/BaseObject.java" />
+		<property name="model" ref="modelMap" />
+	</bean>
+
+</beans>
