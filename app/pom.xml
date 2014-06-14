@@ -1,15 +1,87 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<groupId>com.anywhere</groupId>
-		<artifactId>anywhere</artifactId>
-		<version>1.0.0</version>
-		<relativePath>../maven</relativePath>
-	</parent>
-
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>scheduling</artifactId>
+	<groupId>com.anywhere</groupId>
+	<artifactId>app</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
+	<url>http://maven.apache.org</url>
+	
+	<repositories>
+		<repository>
+			<id>oosnmpRepo</id>
+			<name>oosnmp.com Repository</name>
+			<url>dav:https://server.oosnmp.net/dist/release</url>
+			<layout>default</layout>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>nexus-releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://repo.fusesource.com/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>druid</id>
+			<name>Maven Central Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+	</repositories>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<c3p0>0.9.1.2</c3p0>
+		<cglib>2.2.2</cglib>
+		<ch.qos.logback>1.0.13</ch.qos.logback>
+		<com.alibaba.druid>0.2.26</com.alibaba.druid>
+		<com.google.code.gson>2.2.3</com.google.code.gson>
+		<com.google.collections>1.0</com.google.collections>
+		<com.jolbox.bonecp>0.7.1.RELEASE</com.jolbox.bonecp>
+		<com.sun.mail>1.5.1</com.sun.mail>
+		<com.typesafe.akka>2.1.4</com.typesafe.akka>
+		<commons-beanutils>1.8.2</commons-beanutils>
+		<commons-dbcp>1.4</commons-dbcp>
+		<commons-httpclient>3.0.1</commons-httpclient>
+		<dom4j>1.6.1</dom4j>
+		<javax.faces>1.2</javax.faces>
+		<log4j>1.2.17</log4j>
+		<mysql>5.1.26</mysql>
+		<net.sf.ehcache>2.6.6</net.sf.ehcache>
+		<net.sf.jxls>1.0</net.sf.jxls>
+		<org.apache.activemq>5.7.0</org.apache.activemq>
+		<org.apache.commons.commons-lang3>3.1</org.apache.commons.commons-lang3>
+		<org.apache.httpcomponents>4.3.1</org.apache.httpcomponents>
+		<org.apache.poi>3.9</org.apache.poi>
+		<org.apache.struts>2.3.15.1</org.apache.struts>
+		<org.apache.tomcat>7.0.42</org.apache.tomcat>
+		<org.apache.velocity.tools>2.0</org.apache.velocity.tools>
+		<org.apache.velocity>1.7</org.apache.velocity>
+		<org.aspectj>1.7.2</org.aspectj>
+		<org.freemarker.freemarker>2.3.19</org.freemarker.freemarker>
+		<org.hibernate>5.0.1.Final</org.hibernate>
+		<org.jdom>1.1.3</org.jdom>
+		<org.jfree.jfreechart>1.0.14</org.jfree.jfreechart>
+		<org.mybatis.caches.mybatis-ehcache>1.0.2</org.mybatis.caches.mybatis-ehcache>
+		<org.mybatis.spring>1.2.0</org.mybatis.spring>
+		<org.mybatis>3.2.2</org.mybatis>
+		<org.quartz-scheduler>1.8.6</org.quartz-scheduler>
+		<org.slf4j>1.7.5</org.slf4j>
+		<org.snmp4j.agent>2.0.6</org.snmp4j.agent>
+		<org.snmp4j>2.1.0</org.snmp4j>
+		<org.springframework.security>3.1.4.RELEASE</org.springframework.security>
+		<org.springframework>3.2.5.RELEASE</org.springframework>
+		<proxool>0.9.1</proxool>
+		<scala>2.10.1</scala>
+		<junit>4.11</junit>
+	</properties>
+	
 	<dependencies>
 		<!-- Logging -->
 		<dependency>
