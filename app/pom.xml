@@ -281,6 +281,12 @@
 			<version>${com.alibaba.druid}</version>
 		</dependency>
 		<!-- ########## JDBC Pool Test end ########## -->
+		
+		<dependency>
+			<groupId>dk.brics.automaton</groupId>
+			<artifactId>automaton</artifactId>
+			<version>1.11-8</version>
+		</dependency>
 
 		<!-- JUnit -->
 		<dependency>
