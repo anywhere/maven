@@ -13,25 +13,19 @@ import freemarker.template.Template;
 public class FreemarkerTest extends TestCase {
     
     public void testFreemarker01() throws Exception {
-        String dir = "D:/service/GitHub/app/app/file";
-        
+        // String dir = "D:/service/GitHub/app/app/file";
+        String dir = "E:/kuaipan/git/github/maven/app/file";
         Configuration cfg = new Configuration();
-        
         // 从什么地方加载模板文件
         cfg.setDirectoryForTemplateLoading(new File(dir));
-        
         // 加载模板
         Template template = cfg.getTemplate("test01.ftl");
-        
         // 定义数据
         Map root = new HashMap();
         root.put("stringvalue", "世界你好");
-        
         // 定义输出
         Writer out = new FileWriter(dir + "/test01_out.txt");
-        
         template.process(root, out);
-        
         out.flush();
         out.close();
     }
