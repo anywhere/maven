@@ -16,7 +16,7 @@ public class HeartBeatClient extends QuartzJobBean {
     
     private String name = "HeartBeat";
     
-    private String address = "192.168.0.22";
+    private String address = "192.168.1.102";
     
     private int port = 25535;
     

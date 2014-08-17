@@ -1,7 +1,5 @@
 package com.anywhere.heartbeat;
 
-import org.junit.Before;
-import org.junit.Test;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -12,19 +10,6 @@ import org.quartz.impl.StdSchedulerFactory;
 public class HeartBeatServerTest {
     
     long PERIOD = 5 * 1000;// 5秒钟
-    
-    @Before
-    public void setUp() throws Exception {
-    }
-    
-    @Test
-    public void testRun() {
-        try {
-            new HeartBeatServerTest().startScheduler();
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
-    }
     
     public static void main(String[] args) {
         try {
