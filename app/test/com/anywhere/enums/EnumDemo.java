@@ -3,7 +3,7 @@ package com.anywhere.enums;
 public class EnumDemo {
     
     private enum Color {
-        red, blue, green
+        RED, BLUE, GREEN
     }// there is not a ";"
     
     public static void main(String[] args) {
